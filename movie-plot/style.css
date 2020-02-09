@@ -99,11 +99,15 @@ body {
 
 .screen {
   background-color: #fff;
+  /* background-image: url('https://www.hindustantimes.com/rf/image_size_960x540/HT/p2/2017/12/01/Pictures/_d8143c66-d692-11e7-ad30-e18a56154311.png'); */
+  /* background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover; */
   height: 80px;
   width: 100%;
   margin: 16px 0;
   transform: rotateX(-45deg);
-  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.6);
+  box-shadow: 0 4px 6px rgba(255, 255, 255, 0.8);
 }
 p.text {
   margin: 4px 0;
