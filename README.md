@@ -5,3 +5,4 @@
 Project 1. Form Validator
 Project 2. Movie Seat Booking Simulator
 Project 3. Custom Video Player
+Project 4. gRateExchange
