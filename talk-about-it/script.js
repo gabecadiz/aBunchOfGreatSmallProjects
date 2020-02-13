@@ -14,6 +14,20 @@ const appendMessage = message => {
   messageContainer.append(messageElement);
 };
 
+const appendUserConnected = message => {
+  const userConnectedElement = document.createElement('div');
+  userConnectedElement.classList.add('user-connected');
+  userConnectedElement.innerText = message;
+  messageContainer.append(userConnectedElement);
+};
+
+const appendUserDisconnected = message => {
+  const userDisonnectedElement = document.createElement('div');
+  userDisonnectedElement.classList.add('user-disconnected');
+  userDisonnectedElement.innerText = message;
+  messageContainer.append(userDisonnectedElement);
+};
+
 const name = prompt('What is your name?');
 appendMessage(`You joined as ${name}`);
 socket.emit('new-user', name);
@@ -23,11 +37,11 @@ socket.on('chat-message', data => {
 });
 
 socket.on('user-connected', name => {
-  appendMessage(`${name} has connected`);
+  appendUserConnected(`${name} has connected`);
 });
 
 socket.on('user-disconnected', name => {
-  appendMessage(`${name} has disconnected`);
+  appendUserDisconnected(`${name} has disconnected`);
 });
 
 // Event Listeners

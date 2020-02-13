@@ -1,0 +1,68 @@
+body {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+  background-color: lightsalmon;
+}
+
+.app-container {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.app-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 100%;
+  background-color: orangered;
+}
+
+.app-header-text {
+  height: fit-content;
+}
+
+#message-container {
+  width: 80%;
+  max-width: 1200px;
+  overflow: hidden;
+  height: 80vh;
+  padding: 20px;
+}
+
+#message-container div {
+  background-color: #ccc;
+  padding: 5px;
+}
+
+#message-container div:nth-child(2n) {
+  background-color: #fff;
+}
+
+#message-container div.user-connected {
+  background-color: purple;
+}
+
+#message-container div.user-disconnected {
+  background-color: lightcoral;
+}
+
+#send-container {
+  position: fixed;
+  padding-bottom: 30px;
+  bottom: 0;
+  background-color: transparent;
+  max-width: 1200px;
+  width: 80%;
+  display: flex;
+}
+
+#message-input {
+  flex-grow: 1;
+}
