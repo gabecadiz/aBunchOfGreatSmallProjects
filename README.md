@@ -8,3 +8,4 @@
 | Movie Seat Booking Simulator    | N/A    | 
 | Custom Video Player | N/A      |
 | gRateExchange | N/A      |
+| Array Methods | N/A      |
