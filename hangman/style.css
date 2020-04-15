@@ -111,17 +111,34 @@ h1 {
 
 .notification-container {
   background-color: rgba(0, 0, 0, 0.3);
-  border-radius: 8px 8px 0 0;
+  border-radius: 8px 8px 8px 8px;
   padding: 16px 20px;
   position: absolute;
-  bottom: -50px;
+  bottom: -100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   transition: transform 0.3s ease-in-out;
 }
 
 .notification-container.show {
-  transform: translateY(-80px);
+  transform: translateY(-200px);
 }
 
 .notification-container p {
   margin: 0;
+}
+
+.notifcation-letter {
+  display: inline-block;
+  padding: 4px;
+  margin-top: 4px;
+  font-size: 30px;
+}
+
+#final-word {
+  font-size: 16px;
+  font-weight: 500;
+  color: #eee;
 }

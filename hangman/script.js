@@ -3,7 +3,9 @@ const wrongLettersEl = document.getElementById('wrong-letters');
 const playAgainBtn = document.getElementById('play-button');
 const popup = document.getElementById('popup-container');
 const notification = document.getElementById('notification-container');
+const notificationLetter = document.getElementById('notifcation-letter');
 const finalMessage = document.getElementById('final-message');
+const finalWord = document.getElementById('final-word');
 
 const figureParts = document.querySelectorAll('.figure-part');
 
@@ -64,14 +66,17 @@ const updateWrongLettersEl = () => {
 
   // check if lost
   if (wrongLetters.length === figureParts.length) {
-    finalMessage.innerText = 'Cmon fam do better. Take this L.';
+    finalMessage.innerText = `Cmon fam do better. Take this L.`;
+    finalWord.innerText = `Your word was ${selectedWord}`;
     popup.style.display = 'flex';
   }
 };
 
 // Show notifcation
-const showNotification = () => {
+const showNotification = (letter) => {
+  notificationLetter.innerText = '';
   notification.classList.add('show');
+  notificationLetter.innerText = letter;
 
   setTimeout(() => {
     notification.classList.remove('show');
@@ -80,6 +85,7 @@ const showNotification = () => {
 
 // Keydown letter press
 window.addEventListener('keydown', (e) => {
+  console.log(e);
   if (e.keyCode >= 65 && e.keyCode <= 90) {
     const letter = e.key;
 
@@ -89,7 +95,7 @@ window.addEventListener('keydown', (e) => {
 
         displayWord();
       } else {
-        showNotification();
+        showNotification(letter);
       }
     } else {
       if (!wrongLetters.includes(letter)) {
@@ -97,7 +103,7 @@ window.addEventListener('keydown', (e) => {
 
         updateWrongLettersEl();
       } else {
-        showNotification();
+        showNotification(letter);
       }
     }
   }
