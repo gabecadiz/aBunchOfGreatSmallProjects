@@ -10,3 +10,4 @@
 | gRateExchange                | N/A |
 | Array Methods                | N/A |
 | Menu Slider and Modal        | N/A |
+| Hangman Game                 | N/A |
