@@ -1,18 +1,26 @@
 const wordEl = document.getElementById('word');
-const wrongLetterEl = document.getElementById('wrong-letters');
-const playAgainBtn = document.getElementById('play-again');
+const wrongLettersEl = document.getElementById('wrong-letters');
+const playAgainBtn = document.getElementById('play-button');
 const popup = document.getElementById('popup-container');
 const notification = document.getElementById('notification-container');
 const finalMessage = document.getElementById('final-message');
 
 const figureParts = document.querySelectorAll('.figure-part');
 
-const word = ['application', 'programming', 'interface', 'wizard'];
-
-let selectedWord = word[Math.floor(Math.random() * word.length)];
+let selectedWord = '';
 
 const correctLetters = [];
 const wrongLetters = [];
+
+const fetchSelectedWord = async () => {
+  let response = await fetch(
+    'https://random-word-api.herokuapp.com/word?number=1'
+  );
+  let data = await response.json();
+  let word = data[0];
+  console.log(`YOUR WORD IS: ${word}`);
+  selectedWord = word;
+};
 
 // show hidden word
 const displayWord = () => {
@@ -29,11 +37,88 @@ const displayWord = () => {
   `;
   const innerWord = wordEl.innerText.replace(/\n/g, '');
 
-  console.log(innerWord, selectedWord);
   if (innerWord === selectedWord) {
     finalMessage.innerText = 'Congrats you won fam!';
     popup.style.display = 'flex';
   }
 };
 
-displayWord();
+// Update the wrong letters
+const updateWrongLettersEl = () => {
+  //display wrong letters
+  wrongLettersEl.innerHTML = `
+    ${wrongLetters.length > 0 ? '<p>Wrong</p>' : ''}
+    ${wrongLetters.map((letter) => `<span>${letter}</span>`)}
+  `;
+
+  //display parts
+  figureParts.forEach((part, index) => {
+    const errors = wrongLetters.length;
+
+    if (index < errors) {
+      part.style.display = 'block';
+    } else {
+      part.style.display = 'none';
+    }
+  });
+
+  // check if lost
+  if (wrongLetters.length === figureParts.length) {
+    finalMessage.innerText = 'Cmon fam do better. Take this L.';
+    popup.style.display = 'flex';
+  }
+};
+
+// Show notifcation
+const showNotification = () => {
+  notification.classList.add('show');
+
+  setTimeout(() => {
+    notification.classList.remove('show');
+  }, 1500);
+};
+
+// Keydown letter press
+window.addEventListener('keydown', (e) => {
+  if (e.keyCode >= 65 && e.keyCode <= 90) {
+    const letter = e.key;
+
+    if (selectedWord.includes(letter)) {
+      if (!correctLetters.includes(letter)) {
+        correctLetters.push(letter);
+
+        displayWord();
+      } else {
+        showNotification();
+      }
+    } else {
+      if (!wrongLetters.includes(letter)) {
+        wrongLetters.push(letter);
+
+        updateWrongLettersEl();
+      } else {
+        showNotification();
+      }
+    }
+  }
+});
+
+// Restart Game and play again;
+playAgainBtn.addEventListener('click', () => {
+  // Empty Arrays
+  correctLetters.splice(0);
+  wrongLetters.splice(0);
+
+  startGame();
+
+  updateWrongLettersEl();
+
+  popup.style.display = 'none';
+});
+
+const startGame = async () => {
+  await fetchSelectedWord();
+  displayWord();
+};
+
+startGame();
